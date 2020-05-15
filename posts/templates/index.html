@@ -3,9 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Roast and Boast</title>
   </head>
   <body>
-    <h1>Success</h1>
+    <h1>Roast and Boasts</h1>
+    {% for item in data %}
+    <ul>
+      <li>
+        ({{ item.date_time }}) {{ item.name }} - {{item.user_input}}
+      </li>
+    </ul>
+    {% endfor %}
   </body>
 </html>

@@ -7,10 +7,14 @@
   </head>
   <body>
     <h1>Roast and Boasts</h1>
+    <p>Submit a Roast or Boast <a href="/addpost/">here</a></p>
     {% for item in data %}
     <ul>
       <li>
-        ({{ item.date_time }}) {{ item.name }} - {{item.user_input}}
+        ({{ item.date_time }}) {{ item.name }} - {{item.user_input}}|
+        <button><a href="/like/{{item.id}}">Like</a></button> {{item.up_votes}}
+        <button><a href="/dislike/{{item.id}}">Dislike</a></button
+        >{{item.down_votes}}
       </li>
     </ul>
     {% endfor %}

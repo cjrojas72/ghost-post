@@ -27,3 +27,17 @@ def AddPost(request):
     form = AddPostForm()
 
     return render(request, 'post.html', {"form": form})
+
+
+def LikeView(request, id):
+    post = Post.objects.get(id=id)
+    post.up_votes += 1
+    post.save()
+    return HttpResponseRedirect(reverse('home'))
+
+
+def DislikeView(request, id):
+    post = Post.objects.get(id=id)
+    post.down_votes += 1
+    post.save()
+    return HttpResponseRedirect(reverse('home'))

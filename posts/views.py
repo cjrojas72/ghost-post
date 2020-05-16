@@ -45,15 +45,18 @@ def DislikeView(request, id):
 
 
 def FilterView(request, choices):
-
-    if choices == 'all':
-        view = Post.objects.all()
+    if choices == 'votes':
+        view = Post.objects.order_by('-up_votes')
+        return render(request, 'index.html', {'data': view})
     else:
-        if choices == 'roasts':
-            choice = False
-        if choices == 'boasts':
-            choice = True
-        view = Post.objects.filter(choice=choice)
+        if choices == 'all':
+            view = Post.objects.all()
+        else:
+            if choices == 'roasts':
+                choice = False
+            if choices == 'boasts':
+                choice = True
+            view = Post.objects.filter(choice=choice)
     # return HttpResponseRedirect(reverse('home'), {'data': view})
-    view = view.order_by('-date_time')
-    return render(request, 'index.html', {'data': view})
+        view = view.order_by('-date_time')
+        return render(request, 'index.html', {'data': view})

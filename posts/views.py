@@ -7,6 +7,7 @@ from posts.forms import AddPostForm
 
 def Index(request):
     data = Post.objects.all()
+    data = data.order_by('-date_time')
     return render(request, 'index.html', {'data': data})
 
 
@@ -41,3 +42,18 @@ def DislikeView(request, id):
     post.down_votes += 1
     post.save()
     return HttpResponseRedirect(reverse('home'))
+
+
+def FilterView(request, choices):
+
+    if choices == 'all':
+        view = Post.objects.all()
+    else:
+        if choices == 'roasts':
+            choice = False
+        if choices == 'boasts':
+            choice = True
+        view = Post.objects.filter(choice=choice)
+    # return HttpResponseRedirect(reverse('home'), {'data': view})
+    view = view.order_by('-date_time')
+    return render(request, 'index.html', {'data': view})
